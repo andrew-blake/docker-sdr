@@ -1,0 +1,4 @@
+#!/bin/bash
+
+# log "AlectoV1 Weather Sensor (Alecto WS3500 WS4500 Ventus W155/W044 Oregon)" to log file
+rtl_433 -R 16 -F json 2>&1 >> /data/logs/temperature-log.json

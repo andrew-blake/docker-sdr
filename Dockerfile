@@ -30,6 +30,15 @@ RUN /build-rtl-sdr.sh
 ADD ./setup/build-rtl-433.sh .
 RUN /build-rtl-433.sh
 
+#
+# Add services to runit
+#
+
+RUN mkdir /etc/service/log_temperatures
+COPY run_log_temperatures /etc/service/log_temperatures/run
+RUN chown root /etc/service/log_temperatures/run
+RUN chmod 755 /etc/service/log_temperatures/run
+
 ##
 ## DEBUG ONLY - enabled SSH
 ##
@@ -44,5 +53,9 @@ RUN /build-rtl-433.sh
 #RUN chmod 600 /root/.ssh/authorized_keys
 
 # infinite loop to ensure "make start" to not exit, and we can "make exec-bash"
-CMD /bin/bash -c "while sleep 2; do echo 'thinking'; done"
+#CMD /bin/bash -c "while sleep 2; do echo 'thinking'; done"
+
+# Use baseimage-docker's init system.
+CMD ["/sbin/my_init"]
+
 WORKDIR /data/logs
