@@ -24,11 +24,12 @@ RUN true \
 
 RUN mkdir -p /data/logs/
 
-ADD ./setup/build-rtl-sdr.sh .
-RUN /build-rtl-sdr.sh
+ADD ./setup/install-rtl-sdr.sh .
+RUN /install-rtl-sdr.sh
 
-ADD ./setup/build-rtl-433.sh .
-RUN /build-rtl-433.sh
+ADD ./setup/install-rtl-433.sh .
+RUN /install-rtl-433.sh
+
 
 #
 # Add services to runit
@@ -38,6 +39,8 @@ RUN mkdir /etc/service/log_temperatures
 COPY run_log_temperatures /etc/service/log_temperatures/run
 RUN chown root /etc/service/log_temperatures/run
 RUN chmod 755 /etc/service/log_temperatures/run
+
+RUN echo "\nexport TERM=xterm" >> ~/.bashrc
 
 ##
 ## DEBUG ONLY - enabled SSH
