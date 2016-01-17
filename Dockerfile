@@ -30,6 +30,9 @@ RUN /install-rtl-sdr.sh
 ADD ./setup/install-rtl-433.sh .
 RUN /install-rtl-433.sh
 
+ADD ./setup/install-gnuradio.sh .
+ADD ./setup/build-gnuradio-modified .
+#RUN /install-gnuradio.sh
 
 #
 # Add services to runit
