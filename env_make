@@ -1,0 +1,4 @@
+#PORTS = -p 2222:22
+PORTS =
+VOLUMES = --volumes-from sdr_logs_v0.1
+ENV = --privileged
